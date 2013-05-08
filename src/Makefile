@@ -2,8 +2,8 @@
 
 XCC     = gcc
 AS	= as
-AR	= ar
-CFLAGS  = -c -fPIC -Wall -I. -I../io/include -mcpu=arm920t
+LD  = ld
+CFLAGS  = -c -fPIC -Wall -I. -I../io/include -mcpu=arm920t -msoft-float
 
 ASFLAGS	= -mcpu=arm920t -mapcs-32
 
@@ -17,7 +17,7 @@ LDFLAGS = -init main -Map iotest.map -N  -T orex.ld -L/u/wbcowan/gnuarm-4.0.2/li
 
 all: tst.s tst.elf
 
-tst.s: tst.c tst.elf
+tst.s: tst.c tst.h
 	$(XCC) -S $(CFLAGS) tst.c
 	
 tst.o: tst.s
@@ -28,4 +28,4 @@ tst.elf: tst.o
 	
 
 clean:
-	-rm -f *.s *.o 
+	-rm -f iotest.elf *.s *.o iotest.map
