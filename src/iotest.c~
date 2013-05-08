@@ -1,0 +1,11 @@
+#include <bwio.h>	//io library
+#include <ts7200.h>	//Predefined constants
+
+int main(int argc, char* argv[]){
+	char str[] = "Hello";
+	
+	return 0;
+}
+
+
+
