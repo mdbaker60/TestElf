@@ -1,0 +1,9 @@
+#include <bwio.h>
+#include <ts7200.h>
+
+void main(){
+	bwputstr(2, "Test");
+}
+
+
+
