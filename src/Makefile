@@ -17,6 +17,8 @@ ASFLAGS	= -mcpu=arm920t -mapcs-32
 LDFLAGS = -init main -Map iotest.map -N  -T orex.ld -L/u/wbcowan/gnuarm-4.0.2/lib/gcc/arm-elf/4.0.2 -L../io/lib
 
 all:  iotest.s iotest.elf
+	cp ./iotest.elf /u/cs452/tftp/ARM/mdbaker/a0.elf
+
 
 iotest.s: iotest.c iotest.h
 	$(XCC) -S $(CFLAGS) iotest.c

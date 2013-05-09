@@ -300,7 +300,7 @@ bwputr:
 	sub	sp, sp, #16
 	str	r0, [fp, #-24]
 	str	r1, [fp, #-28]
-	sub	r3, fp, #28
+	ldr	r3, [fp, #-28]
 	str	r3, [fp, #-16]
 	mov	r3, #3
 	str	r3, [fp, #-20]

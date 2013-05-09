@@ -2,7 +2,7 @@
 # Makefile for busy-wait IO tests
 #
 XCC     = gcc
-AS	= as
+AS		= as
 LD      = ld
 CFLAGS  = -c -fPIC -Wall -I. -I../include -mcpu=arm920t -msoft-float
 # -g: include hooks for gdb

@@ -97,9 +97,10 @@ int bwputx( int channel, char c ) {
 	return bwputc( channel, chl );
 }
 
-int bwputr( int channel, unsigned int reg ) {
+int bwputr( int channel, unsigned int * reg ) {
 	int byte;
-	char *ch = (char *) &reg;
+	//char *ch = (char *) &reg;
+	char *ch = (char *)reg;
 
 	for( byte = 3; byte >= 0; byte-- ) bwputx( channel, ch[byte] );
 	return bwputc( channel, ' ' );
