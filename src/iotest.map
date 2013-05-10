@@ -30,40 +30,40 @@ bss             0x0000000000000000        0x0
 
 text            0x0000000000000000      0xf80
  *(.text)
- .text          0x0000000000000000      0x124 iotest.o
+ .text          0x0000000000000000      0x12c iotest.o
                 0x0000000000000000                nl
                 0x0000000000000034                main
- .text          0x0000000000000124      0xc54 ../io/lib/libbwio.a(bwio.o)
-                0x000000000000049c                bwputr
-                0x0000000000000a08                bwi2a
-                0x0000000000000124                bwsetfifo
-                0x00000000000002f8                bwputc
-                0x0000000000000758                bwa2d
-                0x00000000000001ec                bwsetspeed
-                0x00000000000003bc                c2x
-                0x0000000000000800                bwa2i
-                0x00000000000006a0                bwgetc
-                0x00000000000008c4                bwui2a
-                0x0000000000000a6c                bwformat
-                0x0000000000000598                bwputw
-                0x0000000000000d40                bwprintf
-                0x000000000000041c                bwputx
-                0x000000000000051c                bwputstr
- .text          0x0000000000000d78      0x110 /u/wbcowan/gnuarm-4.0.2/lib/gcc/arm-elf/4.0.2/libgcc.a(_udivsi3.o)
-                0x0000000000000d78                __udivsi3
-                0x0000000000000e70                __aeabi_uidivmod
- .text          0x0000000000000e88       0xcc /u/wbcowan/gnuarm-4.0.2/lib/gcc/arm-elf/4.0.2/libgcc.a(_umodsi3.o)
-                0x0000000000000e88                __umodsi3
- .text          0x0000000000000f54        0x4 /u/wbcowan/gnuarm-4.0.2/lib/gcc/arm-elf/4.0.2/libgcc.a(_dvmd_tls.o)
-                0x0000000000000f54                __aeabi_ldiv0
-                0x0000000000000f54                __div0
-                0x0000000000000f54                __aeabi_idiv0
+ .text          0x000000000000012c      0xc54 ../io/lib/libbwio.a(bwio.o)
+                0x00000000000004a4                bwputr
+                0x0000000000000a10                bwi2a
+                0x000000000000012c                bwsetfifo
+                0x0000000000000300                bwputc
+                0x0000000000000760                bwa2d
+                0x00000000000001f4                bwsetspeed
+                0x00000000000003c4                c2x
+                0x0000000000000808                bwa2i
+                0x00000000000006a8                bwgetc
+                0x00000000000008cc                bwui2a
+                0x0000000000000a74                bwformat
+                0x00000000000005a0                bwputw
+                0x0000000000000d48                bwprintf
+                0x0000000000000424                bwputx
+                0x0000000000000524                bwputstr
+ .text          0x0000000000000d80      0x110 /u/wbcowan/gnuarm-4.0.2/lib/gcc/arm-elf/4.0.2/libgcc.a(_udivsi3.o)
+                0x0000000000000d80                __udivsi3
+                0x0000000000000e78                __aeabi_uidivmod
+ .text          0x0000000000000e90       0xcc /u/wbcowan/gnuarm-4.0.2/lib/gcc/arm-elf/4.0.2/libgcc.a(_umodsi3.o)
+                0x0000000000000e90                __umodsi3
+ .text          0x0000000000000f5c        0x4 /u/wbcowan/gnuarm-4.0.2/lib/gcc/arm-elf/4.0.2/libgcc.a(_dvmd_tls.o)
+                0x0000000000000f5c                __aeabi_ldiv0
+                0x0000000000000f5c                __div0
+                0x0000000000000f5c                __aeabi_idiv0
  *(.got)
  *(.got.plt)
- .got.plt       0x0000000000000f58        0xc iotest.o
-                0x0000000000000f58                _GLOBAL_OFFSET_TABLE_
+ .got.plt       0x0000000000000f60        0xc iotest.o
+                0x0000000000000f60                _GLOBAL_OFFSET_TABLE_
  *(.rodata)
- .rodata        0x0000000000000f64       0x1c iotest.o
+ .rodata        0x0000000000000f6c       0x14 iotest.o
  *(.glue_7)
  *(.glue_7t)
 

@@ -10,6 +10,7 @@ void nl(){
 int main(int argc, char* argv[]){
 	//TODO: CLEAN! move time to structure?
 	
+	
 	int in = 1;
 	bwsetfifo(COM2, OFF);	
 	//bwputstr(COM2, str);
@@ -29,14 +30,17 @@ int main(int argc, char* argv[]){
 	
 	//bwputc(COM2, (char)clk);
 	
-	while (in != '0'){
 		bwputstr(COM2, "clk: ");
 		bwputr(COM2, (unsigned int *)(TIMER3_BASE + VAL_OFFSET));
-		//nl();
 		//bwputstr(COM2, "Press 0 to quit");
 		//nl();
-		in = bwgetc(COM2);
-	}
+		//in = bwgetc(COM2);
+		
+		bwputstr(COM2, "TEST");
+		bwputc(COM2, 0x1B);
+		bwputc(COM2, 0x5B);
+		bwputc(COM2, '2');
+		bwputc(COM2, 'J');
 	return 0;
 }
 
