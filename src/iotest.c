@@ -13,7 +13,7 @@ int main(int argc, char* argv[]){
 	
 	int in = 1;
 	bwsetfifo(COM2, OFF);	
-	//bwputstr(COM2, str);
+	
 	//bwputstr(COM2, "argument\n\r");
 	//nl();
 	//bwputc(COM2, 'c');
@@ -29,12 +29,44 @@ int main(int argc, char* argv[]){
 	*(unsigned int *)(TIMER3_BASE + CRTL_OFFSET + ENABLE_MASK) = 1;
 	
 	//bwputc(COM2, (char)clk);
-	
-		bwputstr(COM2, "clk: ");
-		bwputr(COM2, (unsigned int *)(TIMER3_BASE + VAL_OFFSET));
 		//bwputstr(COM2, "Press 0 to quit");
 		//nl();
 		//in = bwgetc(COM2);
+		//if (in == '0') return 0;
+		int c;
+		int * flags = (int *)(UART2_BASE + UART_FLAG_OFFSET);
+		int * data = (int *)(UART2_BASE + UART_DATA_OFFSET);
+
+		*data = 'a';
+		while(!( *flags & RXFF_MASK));//While the recieve FIFO is not full.
+
+		while(1){
+			//TODO This while loop contains
+			//code for printing an input key to the 
+			char in;
+			if (*flags & RXFF_MASK){
+				in = *data;
+				if (in == '\r') *data = '\n';
+				else if (in == '\b'){
+					*data = in;//Move cursor back
+
+					//delete last char
+					while (*flags & TXFF_MASK);
+					*data = 0x1B;
+					while (*flags & TXFF_MASK);
+					*data = 0x5B;
+					while (*flags & TXFF_MASK);
+					*data = 'K';
+				} 
+				else *data = in;
+			}
+			//Simple io console test
+			//Transmit input, then send it back
+
+		}	
+		bwputstr(COM2, "clk: ");
+		bwputr(COM2, (unsigned int *)(TIMER3_BASE + VAL_OFFSET));
+
 		
 		//Attempt to erase current line
 		//	Esc[80D
