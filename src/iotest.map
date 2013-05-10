@@ -28,42 +28,42 @@ bss             0x0000000000000000        0x0
  *(.bss)
                 0x0000000000000000                _BssEnd = .
 
-text            0x0000000000000000      0xf80
+text            0x0000000000000000      0xfe4
  *(.text)
- .text          0x0000000000000000      0x12c iotest.o
+ .text          0x0000000000000000      0x178 iotest.o
                 0x0000000000000000                nl
                 0x0000000000000034                main
- .text          0x000000000000012c      0xc54 ../io/lib/libbwio.a(bwio.o)
-                0x00000000000004a4                bwputr
-                0x0000000000000a10                bwi2a
-                0x000000000000012c                bwsetfifo
-                0x0000000000000300                bwputc
-                0x0000000000000760                bwa2d
-                0x00000000000001f4                bwsetspeed
-                0x00000000000003c4                c2x
-                0x0000000000000808                bwa2i
-                0x00000000000006a8                bwgetc
-                0x00000000000008cc                bwui2a
-                0x0000000000000a74                bwformat
-                0x00000000000005a0                bwputw
-                0x0000000000000d48                bwprintf
-                0x0000000000000424                bwputx
-                0x0000000000000524                bwputstr
- .text          0x0000000000000d80      0x110 /u/wbcowan/gnuarm-4.0.2/lib/gcc/arm-elf/4.0.2/libgcc.a(_udivsi3.o)
-                0x0000000000000d80                __udivsi3
-                0x0000000000000e78                __aeabi_uidivmod
- .text          0x0000000000000e90       0xcc /u/wbcowan/gnuarm-4.0.2/lib/gcc/arm-elf/4.0.2/libgcc.a(_umodsi3.o)
-                0x0000000000000e90                __umodsi3
- .text          0x0000000000000f5c        0x4 /u/wbcowan/gnuarm-4.0.2/lib/gcc/arm-elf/4.0.2/libgcc.a(_dvmd_tls.o)
-                0x0000000000000f5c                __aeabi_ldiv0
-                0x0000000000000f5c                __div0
-                0x0000000000000f5c                __aeabi_idiv0
+ .text          0x0000000000000178      0xc54 ../io/lib/libbwio.a(bwio.o)
+                0x00000000000004f0                bwputr
+                0x0000000000000a5c                bwi2a
+                0x0000000000000178                bwsetfifo
+                0x000000000000034c                bwputc
+                0x00000000000007ac                bwa2d
+                0x0000000000000240                bwsetspeed
+                0x0000000000000410                c2x
+                0x0000000000000854                bwa2i
+                0x00000000000006f4                bwgetc
+                0x0000000000000918                bwui2a
+                0x0000000000000ac0                bwformat
+                0x00000000000005ec                bwputw
+                0x0000000000000d94                bwprintf
+                0x0000000000000470                bwputx
+                0x0000000000000570                bwputstr
+ .text          0x0000000000000dcc      0x110 /u/wbcowan/gnuarm-4.0.2/lib/gcc/arm-elf/4.0.2/libgcc.a(_udivsi3.o)
+                0x0000000000000dcc                __udivsi3
+                0x0000000000000ec4                __aeabi_uidivmod
+ .text          0x0000000000000edc       0xcc /u/wbcowan/gnuarm-4.0.2/lib/gcc/arm-elf/4.0.2/libgcc.a(_umodsi3.o)
+                0x0000000000000edc                __umodsi3
+ .text          0x0000000000000fa8        0x4 /u/wbcowan/gnuarm-4.0.2/lib/gcc/arm-elf/4.0.2/libgcc.a(_dvmd_tls.o)
+                0x0000000000000fa8                __aeabi_ldiv0
+                0x0000000000000fa8                __div0
+                0x0000000000000fa8                __aeabi_idiv0
  *(.got)
  *(.got.plt)
- .got.plt       0x0000000000000f60        0xc iotest.o
-                0x0000000000000f60                _GLOBAL_OFFSET_TABLE_
+ .got.plt       0x0000000000000fac        0xc iotest.o
+                0x0000000000000fac                _GLOBAL_OFFSET_TABLE_
  *(.rodata)
- .rodata        0x0000000000000f6c       0x14 iotest.o
+ .rodata        0x0000000000000fb8       0x2c iotest.o
  *(.glue_7)
  *(.glue_7t)
 

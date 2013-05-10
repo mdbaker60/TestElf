@@ -36,11 +36,31 @@ int main(int argc, char* argv[]){
 		//nl();
 		//in = bwgetc(COM2);
 		
+		//Attempt to erase current line
+		//	Esc[80D
+		//	ESC[K
+		
+		//Write a string
 		bwputstr(COM2, "TEST");
+		
+		//Escape sequence (Esc[)
 		bwputc(COM2, 0x1B);
 		bwputc(COM2, 0x5B);
-		bwputc(COM2, '2');
-		bwputc(COM2, 'J');
+		//Enter value 80
+		bwputc(COM2, 0x38);
+		bwputc(COM2, 0x30);
+		//Escape Function
+		bwputc(COM2, 'D');
+
+		//Escape sequence(ESC[)
+		bwputc(COM2, 0x1B);
+		bwputc(COM2, 0x5B);
+		//Escape Function
+		bwputc(COM2, 'K');
+
+		//Did it work?
+		nl();
+		bwputstr(COM2, "TEST should be gone\r");		
 	return 0;
 }
 
