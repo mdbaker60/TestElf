@@ -28,42 +28,46 @@ bss             0x0000000000000000        0x0
  *(.bss)
                 0x0000000000000000                _BssEnd = .
 
-text            0x0000000000000000      0xfe4
+text            0x0000000000000000     0x11d4
  *(.text)
- .text          0x0000000000000000      0x178 iotest.o
+ .text          0x0000000000000000      0x370 iotest.o
+                0x00000000000000d4                putstr
+                0x0000000000000128                clkinit
                 0x0000000000000000                nl
-                0x0000000000000034                main
- .text          0x0000000000000178      0xc54 ../io/lib/libbwio.a(bwio.o)
-                0x00000000000004f0                bwputr
-                0x0000000000000a5c                bwi2a
-                0x0000000000000178                bwsetfifo
-                0x000000000000034c                bwputc
-                0x00000000000007ac                bwa2d
-                0x0000000000000240                bwsetspeed
-                0x0000000000000410                c2x
-                0x0000000000000854                bwa2i
-                0x00000000000006f4                bwgetc
-                0x0000000000000918                bwui2a
-                0x0000000000000ac0                bwformat
-                0x00000000000005ec                bwputw
-                0x0000000000000d94                bwprintf
-                0x0000000000000470                bwputx
-                0x0000000000000570                bwputstr
- .text          0x0000000000000dcc      0x110 /u/wbcowan/gnuarm-4.0.2/lib/gcc/arm-elf/4.0.2/libgcc.a(_udivsi3.o)
-                0x0000000000000dcc                __udivsi3
-                0x0000000000000ec4                __aeabi_uidivmod
- .text          0x0000000000000edc       0xcc /u/wbcowan/gnuarm-4.0.2/lib/gcc/arm-elf/4.0.2/libgcc.a(_umodsi3.o)
-                0x0000000000000edc                __umodsi3
- .text          0x0000000000000fa8        0x4 /u/wbcowan/gnuarm-4.0.2/lib/gcc/arm-elf/4.0.2/libgcc.a(_dvmd_tls.o)
-                0x0000000000000fa8                __aeabi_ldiv0
-                0x0000000000000fa8                __div0
-                0x0000000000000fa8                __aeabi_idiv0
+                0x00000000000002e4                main
+                0x0000000000000034                putc
+                0x0000000000000178                trainCommand
+ .text          0x0000000000000370      0xc54 ../io/lib/libbwio.a(bwio.o)
+                0x00000000000006e8                bwputr
+                0x0000000000000c54                bwi2a
+                0x0000000000000370                bwsetfifo
+                0x0000000000000544                bwputc
+                0x00000000000009a4                bwa2d
+                0x0000000000000438                bwsetspeed
+                0x0000000000000608                c2x
+                0x0000000000000a4c                bwa2i
+                0x00000000000008ec                bwgetc
+                0x0000000000000b10                bwui2a
+                0x0000000000000cb8                bwformat
+                0x00000000000007e4                bwputw
+                0x0000000000000f8c                bwprintf
+                0x0000000000000668                bwputx
+                0x0000000000000768                bwputstr
+ .text          0x0000000000000fc4      0x110 /u/wbcowan/gnuarm-4.0.2/lib/gcc/arm-elf/4.0.2/libgcc.a(_udivsi3.o)
+                0x0000000000000fc4                __udivsi3
+                0x00000000000010bc                __aeabi_uidivmod
+ .text          0x00000000000010d4       0xcc /u/wbcowan/gnuarm-4.0.2/lib/gcc/arm-elf/4.0.2/libgcc.a(_umodsi3.o)
+                0x00000000000010d4                __umodsi3
+ .text          0x00000000000011a0        0x4 /u/wbcowan/gnuarm-4.0.2/lib/gcc/arm-elf/4.0.2/libgcc.a(_dvmd_tls.o)
+                0x00000000000011a0                __aeabi_ldiv0
+                0x00000000000011a0                __div0
+                0x00000000000011a0                __aeabi_idiv0
  *(.got)
  *(.got.plt)
- .got.plt       0x0000000000000fac        0xc iotest.o
-                0x0000000000000fac                _GLOBAL_OFFSET_TABLE_
+ .got.plt       0x00000000000011a4        0xc iotest.o
+                0x00000000000011a4                _GLOBAL_OFFSET_TABLE_
  *(.rodata)
- .rodata        0x0000000000000fb8       0x2c iotest.o
+ .rodata        0x00000000000011b0       0x24 iotest.o
  *(.glue_7)
  *(.glue_7t)
 

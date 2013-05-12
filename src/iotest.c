@@ -3,98 +3,140 @@
 
 
 void nl(){
+	//TODO REMOVE
 	bwputstr(COM2, "\n\r");
 }
+void putc(int channel, char c){
+	
+	int* data;
+	int* flags;
+	
+	switch(channel){
+	case 1:
+		data  = (int *)(UART1_BASE + UART_DATA_OFFSET);
+		flags = (int *)(UART1_BASE + UART_FLAG_OFFSET);
+		break;
+	case 2:
+		data  = (int *)(UART2_BASE + UART_DATA_OFFSET);
+		flags = (int *)(UART2_BASE + UART_FLAG_OFFSET);
+		break;
 
+	}
+	//Change this to if
+	//Return error when TXFF_MASK is not set
+	while(!(*flags & TXFE_MASK));
+	*data = c;
+}
+void putstr(int channel, char* str){
+	while(*str){
+		putc(channel, *str);
+		str++;
+	}
+}
 
-int main(int argc, char* argv[]){
-	//TODO: CLEAN! move time to structure?
-	
-	
-	int in = 1;
-	bwsetfifo(COM2, OFF);	
-	
-	//bwputstr(COM2, "argument\n\r");
-	//nl();
-	//bwputc(COM2, 'c');
-	//bwputx(COM2, 'c');
-	//bwputr(COM2, 0);
+void clkinit(){
+
 	*(unsigned int *)(TIMER3_BASE + CRTL_OFFSET + MODE_MASK) = 0;
-	
 	//Load the initial timer value
 	*(unsigned int *)(TIMER3_BASE + LDR_OFFSET) = 0xFFFFFFFF;
 	//2 kHz mode (...?)
-	*(unsigned int *)(TIMER3_BASE + CRTL_OFFSET + CLKSEL_MASK) = 0;
+	*(unsigned int *)(TIMER3_BASE + CRTL_OFFSET + CLKSEL_MASK) = 1;
 	//Start the timer (...?)
 	*(unsigned int *)(TIMER3_BASE + CRTL_OFFSET + ENABLE_MASK) = 1;
-	
-	//bwputc(COM2, (char)clk);
-		//bwputstr(COM2, "Press 0 to quit");
-		//nl();
-		//in = bwgetc(COM2);
-		//if (in == '0') return 0;
-		int c;
-		int * flags = (int *)(UART2_BASE + UART_FLAG_OFFSET);
-		int * data = (int *)(UART2_BASE + UART_DATA_OFFSET);
-
-		*data = 'a';
-		while(!( *flags & RXFF_MASK));//While the recieve FIFO is not full.
-
-		while(1){
-			//TODO This while loop contains
-			//code for printing an input key to the 
-			char in;
-			if (*flags & RXFF_MASK){
-				in = *data;
-				if (in == '\r') *data = '\n';
-				else if (in == '\b'){
-					*data = in;//Move cursor back
-
-					//delete last char
-					while (*flags & TXFF_MASK);
-					*data = 0x1B;
-					while (*flags & TXFF_MASK);
-					*data = 0x5B;
-					while (*flags & TXFF_MASK);
-					*data = 'K';
-				} 
-				else *data = in;
-			}
-			//Simple io console test
-			//Transmit input, then send it back
-
-		}	
-		bwputstr(COM2, "clk: ");
-		bwputr(COM2, (unsigned int *)(TIMER3_BASE + VAL_OFFSET));
-
-		
-		//Attempt to erase current line
-		//	Esc[80D
-		//	ESC[K
-		
-		//Write a string
-		bwputstr(COM2, "TEST");
-		
-		//Escape sequence (Esc[)
-		bwputc(COM2, 0x1B);
-		bwputc(COM2, 0x5B);
-		//Enter value 80
-		bwputc(COM2, 0x38);
-		bwputc(COM2, 0x30);
-		//Escape Function
-		bwputc(COM2, 'D');
-
-		//Escape sequence(ESC[)
-		bwputc(COM2, 0x1B);
-		bwputc(COM2, 0x5B);
-		//Escape Function
-		bwputc(COM2, 'K');
-
-		//Did it work?
-		nl();
-		bwputstr(COM2, "TEST should be gone\r");		
-	return 0;
 }
 
+void trainCommand(){
+	//Set rate
+	int * high, *low;
+	high = (int *)(UART1_BASE + UART_LCRM_OFFSET); 
+	low =  (int *)(UART1_BASE + UART_LCRL_OFFSET);
+	*high = 0x0;
+	*low = 0xC4;
+	int i;
+	//Initalize the UART1 control
+	int * line = (int *)(UART1_BASE + UART_LCRH_OFFSET);	
+	int buf = *line;
+	//buf = buf | WLEN_MASK;
+	buf = buf & ~PEN_MASK;
+	buf = buf | STP2_MASK;
+	*line = buf;
+	//TODO Temporary
+	//putc(1, 0x1);
+	putc(1, 5);	
+	for (i = 0; i < 99999; i++);
+	putc(1, 48);
+	putstr(2, "Press q to stop train.");
+	while(1){
+		if (*(int *)(UART2_BASE + UART_FLAG_OFFSET) & RXFF_MASK){
+			if(*(int *)(UART2_BASE + UART_DATA_OFFSET) == 'q') break;	
+		} 
+	}
+	putc(1, 0);
+	for (i = 0; i < 1500; i++);
+	putc(1, 48);
+}
+int main(int argc, char* argv[]){
 
+	clkinit();	
+	int in = 1;
+	bwsetfifo(COM2, OFF);	
+	bwsetfifo(COM1, OFF);	
+	int c;
+	int * flags = (int *)(UART2_BASE + UART_FLAG_OFFSET);
+	int * data = (int *)(UART2_BASE + UART_DATA_OFFSET);
+	//char * clk = "clk: \0";
+	putstr(2, "clk: \n");
+	//Train command
+	trainCommand();
+	while(0){
+		int i;
+		/*
+		for(i = 0; i <=4; i++){
+		while (*flags & TXFF_MASK);
+		*data = clk[i];
+
+		}*/
+		//TODO This while loop contains
+		//code for printing an input key to the 
+		char in;
+		if (*flags & RXFF_MASK){
+			in = *data;
+			if (in == '\r'){
+			//Stay on the current line, but delete it, thus
+			//	move cursor home (later to end of terminal prompt)
+			//	delete everything past the cursor
+			while (*flags & TXFF_MASK);
+			*data = 0x1B;
+			while (*flags & TXFF_MASK);
+			*data = 0x5B;
+			while (*flags & TXFF_MASK);
+			*data = 0x38;
+			while (*flags & TXFF_MASK);
+			*data = 0x30;
+			while (*flags & TXFF_MASK);
+			*data = 'D';
+			while (*flags & TXFF_MASK);
+			*data = 0x1B;
+			while (*flags & TXFF_MASK);
+			*data = 0x5B;
+			while (*flags & TXFF_MASK);
+			*data = 'K';
+			}
+			else if (in == '\b'){
+				*data = in;//Move cursor back
+
+				//delete last char
+
+				while (*flags & TXFF_MASK);
+				*data = 0x1B;
+				while (*flags & TXFF_MASK);
+				*data = 0x5B;
+				while (*flags & TXFF_MASK);
+				*data = 'K';
+			} 
+			else *data = in;
+		}
+	}	
+	return 0;
+}
 
